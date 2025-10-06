@@ -11,8 +11,6 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { Card, CardBody } from '@/components/ui/Card'
 import { Breadcrumbs } from '@/components/navigation/Breadcrumbs'
-import { usingSampleData } from '@/lib/sanity/client'
-import { search as sampleSearch } from '@/lib/sanity/sample-data'
 
 interface SearchResult {
   _id: string
@@ -42,14 +40,9 @@ export default function SearchPage() {
       setIsLoading(true)
       
       try {
-        if (usingSampleData()) {
-          const searchResults = sampleSearch(query)
-          setResults(searchResults)
-        } else {
-          const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`)
-          const data = await res.json()
-          setResults(data.results || [])
-        }
+        const res = await fetch(`/api/search?q=${encodeURIComponent(query)}`)
+        const data = await res.json()
+        setResults(data.results || [])
       } catch (error) {
         console.error('Search error:', error)
         setResults([])

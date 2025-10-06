@@ -5,8 +5,8 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
-import { usingSampleData } from '@/lib/sanity/client'
-import { search as sampleSearch } from '@/lib/sanity/sample-data'
+import { client } from '@/lib/sanity/client'
+import { searchQuery } from '@/lib/sanity/queries'
 
 export async function GET(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
@@ -17,15 +17,16 @@ export async function GET(request: NextRequest) {
   }
   
   try {
-    if (usingSampleData()) {
-      // Use sample data search
-      const results = sampleSearch(query)
-      return NextResponse.json({ results })
-    } else {
-      // Would search Sanity in production
-      // const results = await client.fetch(searchQuery, { searchTerm: query + '*' })
-      return NextResponse.json({ results: [] })
-    }
+    const results = await client.fetch(searchQuery, { searchTerm: query })
+    
+    // Format results with URLs
+    const formattedResults = results.map((result: any) => ({
+      ...result,
+      url: `/${result._type === 'cartel' ? 'cartels' : result._type === 'person' ? 'people' : result._type}s/${result.slug.current}`,
+      type: result._type
+    }))
+    
+    return NextResponse.json({ results: formattedResults })
   } catch (error) {
     console.error('Search API error:', error)
     return NextResponse.json({ results: [], error: 'Search failed' }, { status: 500 })

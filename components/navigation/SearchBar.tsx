@@ -10,8 +10,6 @@ import { useState, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useDebouncedCallback } from 'use-debounce'
-import { usingSampleData } from '@/lib/sanity/client'
-import { search as sampleSearch } from '@/lib/sanity/sample-data'
 
 interface SearchResult {
   _id: string
@@ -55,16 +53,10 @@ export function SearchBar() {
     setIsLoading(true)
     
     try {
-      if (usingSampleData()) {
-        // Use sample data search
-        const searchResults = sampleSearch(searchQuery)
-        setResults(searchResults)
-      } else {
-        // Use API search
-        const res = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`)
-        const data = await res.json()
-        setResults(data.results || [])
-      }
+      // Use API search
+      const res = await fetch(`/api/search?q=${encodeURIComponent(searchQuery)}`)
+      const data = await res.json()
+      setResults(data.results || [])
       setIsOpen(true)
     } catch (error) {
       console.error('Search error:', error)

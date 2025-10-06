@@ -8,9 +8,9 @@ import Link from 'next/link'
 import { Card, CardBody } from '@/components/ui/Card'
 import { Badge } from '@/components/ui/Badge'
 import { Breadcrumbs } from '@/components/navigation/Breadcrumbs'
-import { usingSampleData, client } from '@/lib/sanity/client'
-import { getAllPeople } from '@/lib/sanity/sample-data'
+import { client } from '@/lib/sanity/client'
 import { allPeopleQuery } from '@/lib/sanity/queries'
+import type { Person } from '@/types'
 
 export const metadata = {
   title: 'Subjects - NarcoWatch Intelligence',
@@ -18,9 +18,7 @@ export const metadata = {
 }
 
 export default async function PeoplePage() {
-  const people = usingSampleData() 
-    ? getAllPeople()
-    : await client.fetch(allPeopleQuery)
+  const people: Person[] = await client.fetch(allPeopleQuery)
   
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-dark-bg-primary">

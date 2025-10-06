@@ -8,9 +8,9 @@ import Link from 'next/link'
 import { Badge } from '@/components/ui/Badge'
 import { Breadcrumbs } from '@/components/navigation/Breadcrumbs'
 import { DatabaseIcon, ArrowRightIcon } from '@/components/ui/Icons'
-import { usingSampleData, client } from '@/lib/sanity/client'
-import { getAllCartels } from '@/lib/sanity/sample-data'
+import { client } from '@/lib/sanity/client'
 import { allCartelsQuery } from '@/lib/sanity/queries'
+import type { Cartel } from '@/types'
 
 export const metadata = {
   title: 'Organizations - NarcoWatch Intelligence',
@@ -18,9 +18,7 @@ export const metadata = {
 }
 
 export default async function CartelsPage() {
-  const cartels = usingSampleData() 
-    ? getAllCartels()
-    : await client.fetch(allCartelsQuery)
+  const cartels: Cartel[] = await client.fetch(allCartelsQuery)
   
   return (
     <div className="min-h-screen bg-intel-bg-primary">

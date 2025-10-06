@@ -12,8 +12,9 @@ import { CitationsList } from '@/components/content/CitationsList'
 import { Breadcrumbs } from '@/components/navigation/Breadcrumbs'
 import { Card, CardBody, CardHeader } from '@/components/ui/Card'
 import { formatDate } from '@/lib/utils/date'
-import { usingSampleData } from '@/lib/sanity/client'
-import { getCartelBySlug } from '@/lib/sanity/sample-data'
+import { client } from '@/lib/sanity/client'
+import { cartelBySlugQuery } from '@/lib/sanity/queries'
+import type { Cartel } from '@/types'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -21,9 +22,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params
-  const cartel = usingSampleData()
-    ? getCartelBySlug(slug)
-    : null // Would fetch from Sanity in production
+  const cartel: Cartel | null = await client.fetch(cartelBySlugQuery, { slug })
   
   if (!cartel) {
     return {
@@ -39,9 +38,7 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function CartelPage({ params }: PageProps) {
   const { slug } = await params
-  const cartel = usingSampleData()
-    ? getCartelBySlug(slug)
-    : null // Would fetch from Sanity in production
+  const cartel: Cartel | null = await client.fetch(cartelBySlugQuery, { slug })
   
   if (!cartel) {
     notFound()

@@ -11,8 +11,9 @@ import { PortableTextRenderer } from '@/components/content/PortableTextRenderer'
 import { CitationsList } from '@/components/content/CitationsList'
 import { Breadcrumbs } from '@/components/navigation/Breadcrumbs'
 import { formatDate } from '@/lib/utils/date'
-import { usingSampleData } from '@/lib/sanity/client'
-import { getPersonBySlug } from '@/lib/sanity/sample-data'
+import { client } from '@/lib/sanity/client'
+import { personBySlugQuery } from '@/lib/sanity/queries'
+import type { Person } from '@/types'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -20,9 +21,7 @@ interface PageProps {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params
-  const person = usingSampleData()
-    ? getPersonBySlug(slug)
-    : null
+  const person: Person | null = await client.fetch(personBySlugQuery, { slug })
   
   if (!person) {
     return { title: 'Person Not Found - NarcoWatch Wiki' }
@@ -36,9 +35,7 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function PersonPage({ params }: PageProps) {
   const { slug } = await params
-  const person = usingSampleData()
-    ? getPersonBySlug(slug)
-    : null
+  const person: Person | null = await client.fetch(personBySlugQuery, { slug })
   
   if (!person) {
     notFound()

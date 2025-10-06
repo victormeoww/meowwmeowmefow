@@ -24,8 +24,6 @@ interface PersonInfoboxProps {
 export function PersonInfobox({ data }: PersonInfoboxProps) {
   return (
     <InfoboxBase>
-      <InfoboxImage src={data.photoUrl} alt={data.fullName} />
-      
       <InfoboxBody>
         {/* Full Name */}
         <InfoboxRow

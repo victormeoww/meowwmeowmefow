@@ -25,8 +25,6 @@ interface CartelInfoboxProps {
 export function CartelInfobox({ data }: CartelInfoboxProps) {
   return (
     <InfoboxBase>
-      <InfoboxImage src={data.logoUrl} alt={`${data.name} logo`} />
-      
       <InfoboxBody>
         {/* Status */}
         <InfoboxRow
@@ -88,10 +86,10 @@ export function CartelInfobox({ data }: CartelInfoboxProps) {
         )}
         
         {/* Leadership */}
-        {data.leaders && data.leaders.length > 0 && (
+        {data.leadership && data.leadership.length > 0 && (
           <InfoboxSection title="Leadership">
             <InfoboxList
-              items={data.leaders.map(leader => ({
+              items={data.leadership.map(leader => ({
                 id: leader._id,
                 label: (
                   <div>

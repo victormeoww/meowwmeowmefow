@@ -1,0 +1,44 @@
+{
+  "name": "narcowatch-wiki",
+  "version": "2.0.0",
+  "description": "NarcoWatch Intelligence Platform - Organized crime intelligence database",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@portabletext/react": "^3.1.0",
+    "@sanity/client": "^6.20.0",
+    "@sanity/image-url": "^1.0.2",
+    "@types/d3": "^7.4.3",
+    "clsx": "^2.1.1",
+    "d3": "^7.9.0",
+    "date-fns": "^3.6.0",
+    "leaflet": "^1.9.4",
+    "next": "^15.0.0",
+    "next-sanity": "^9.12.3",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-leaflet": "^4.2.1",
+    "sanity": "^3.50.0",
+    "styled-components": "^6.1.19",
+    "use-debounce": "^10.0.1"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.12",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "autoprefixer": "^10.4.0",
+    "eslint": "^8.57.0",
+    "eslint-config-next": "^15.0.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
+    "tsx": "^4.16.0",
+    "typescript": "^5.5.0"
+  }
+}

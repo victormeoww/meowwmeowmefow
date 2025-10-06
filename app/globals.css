@@ -1,0 +1,53 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Intelligence Platform Color System */
+  --intel-bg-primary: #0a0e1a;
+  --intel-bg-secondary: #141829;
+  --intel-bg-tertiary: #1a1f38;
+  
+  --intel-text-primary: #e4e7eb;
+  --intel-text-secondary: #9ca3af;
+  --intel-text-muted: #6b7280;
+  
+  --intel-accent-blue: #3b82f6;
+  --intel-accent-red: #ef4444;
+  --intel-accent-yellow: #f59e0b;
+  --intel-accent-green: #10b981;
+  
+  --intel-border: #2d3548;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  background-color: var(--intel-bg-primary);
+  color: var(--intel-text-primary);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--intel-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--intel-bg-tertiary);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #2d3548;
+}
+

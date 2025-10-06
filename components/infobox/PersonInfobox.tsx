@@ -7,7 +7,8 @@
 import Link from 'next/link'
 import type { Person } from '@/types'
 import { Badge } from '@/components/ui/Badge'
-import { formatDate, formatCurrency } from '@/lib/utils/date'
+import { formatDate } from '@/lib/utils/date'
+import { formatCurrency } from '@/lib/utils/text'
 import {
   InfoboxBase,
   InfoboxImage,

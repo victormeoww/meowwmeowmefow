@@ -16,12 +16,13 @@ import { usingSampleData } from '@/lib/sanity/client'
 import { getCartelBySlug } from '@/lib/sanity/sample-data'
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params
   const cartel = usingSampleData()
-    ? getCartelBySlug(params.slug)
+    ? getCartelBySlug(slug)
     : null // Would fetch from Sanity in production
   
   if (!cartel) {
@@ -37,8 +38,9 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export default async function CartelPage({ params }: PageProps) {
+  const { slug } = await params
   const cartel = usingSampleData()
-    ? getCartelBySlug(params.slug)
+    ? getCartelBySlug(slug)
     : null // Would fetch from Sanity in production
   
   if (!cartel) {

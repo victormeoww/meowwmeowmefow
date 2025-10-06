@@ -15,12 +15,13 @@ import { usingSampleData } from '@/lib/sanity/client'
 import { getPersonBySlug } from '@/lib/sanity/sample-data'
 
 interface PageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export async function generateMetadata({ params }: PageProps) {
+  const { slug } = await params
   const person = usingSampleData()
-    ? getPersonBySlug(params.slug)
+    ? getPersonBySlug(slug)
     : null
   
   if (!person) {
@@ -34,8 +35,9 @@ export async function generateMetadata({ params }: PageProps) {
 }
 
 export default async function PersonPage({ params }: PageProps) {
+  const { slug } = await params
   const person = usingSampleData()
-    ? getPersonBySlug(params.slug)
+    ? getPersonBySlug(slug)
     : null
   
   if (!person) {

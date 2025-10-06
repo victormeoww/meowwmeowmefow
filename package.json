@@ -14,6 +14,7 @@
     "@portabletext/react": "^3.1.0",
     "@sanity/client": "^6.20.0",
     "@sanity/image-url": "^1.0.2",
+    "@sanity/vision": "^3.50.0",
     "@types/d3": "^7.4.3",
     "clsx": "^2.1.1",
     "d3": "^7.9.0",
